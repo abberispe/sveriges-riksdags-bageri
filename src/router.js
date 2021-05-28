@@ -3,8 +3,10 @@ import {
   createWebHistory
 } from 'vue-router'
 
+import store from "./store/index.js";
 
-export default createRouter({
+
+const router = createRouter({
   history: createWebHistory(),
   routes: [{
       path: '/',
@@ -25,11 +27,37 @@ export default createRouter({
       path: '/login',
       name: "Login",
       component: () => import("./views/Signin.vue"),
-    }
+    },
     {
       path: '/cart',
       name: "Cart",
+      meta: {
+        requiresAuth: true
+      },
+      
       component: () => import("./views/Cart.vue"),
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.isLoggedIn) {
+     
+      next({
+        path: "/login",
+        query: { redirect: to.fullPath }
+      })
+
+    } else {
+
+      next()
+
+    }
+  } else {
+    next()
+  }
+})
+
+
+export default router

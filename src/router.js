@@ -18,6 +18,11 @@ export default createRouter({
       path: '/about',
       name: "About",
       component: () => import("./views/About.vue"),
+    },
+    {
+      path: '/login',
+      name: "Login",
+      component: () => import("./views/Signin.vue"),
     }
   ]
 })

@@ -25,7 +25,7 @@ export default createRouter({
       path: '/login',
       name: "Login",
       component: () => import("./views/Signin.vue"),
-    }
+    },
     {
       path: '/cart',
       name: "Cart",

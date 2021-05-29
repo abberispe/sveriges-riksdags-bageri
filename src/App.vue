@@ -19,4 +19,8 @@
   font-family: "Roboto";
   src: local("Roboto"), url(./fonts/Roboto-Thin.ttf) format("truetype");
 }
+@font-face {
+  font-family: "Raleway";
+  src: local("Raleway"), url(./fonts/Raleway-Regular.ttf) format("truetype");
+}
 </style>

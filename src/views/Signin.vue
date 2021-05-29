@@ -37,6 +37,7 @@ export default {
             this.$store.dispatch("login", [this.email, this.password]).then(status => {
                 if (status) {
                     console.log("success")
+                    this.$router.push(this.$route.query.redirect || '/')
                 } else {
                     console.log("wrong password or email")
                 }

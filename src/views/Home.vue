@@ -74,13 +74,13 @@
           <div class="flex flex-col justify-center items-center">
                 <div class="px-auto w-1/2">
                     <div class="mt-4">
-                        <input placeholder="Användarnamn" class="bg-white text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="email">
+                        <input placeholder="Användarnamn" v-model="email" class="bg-white text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="email">
                     </div>
                     <div class="mt-4">
-                        <input placeholder="Lösenord" class="bg-white text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password">
+                        <input placeholder="Lösenord" v-model="password" class="bg-white text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password">
                     </div>
                     <div class="mt-8">
-                        <button class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Logga in</button>
+                        <button @click="login" class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Logga in</button>
                     </div>
                     <div class="mt-4 flex items-center justify-between">
                         <span class="border-b w-1/5 md:w-1/4"></span>
@@ -97,6 +97,32 @@
 
 <script>
 import Menu from '../components/menu.vue'
+
+export default {
+  data () {
+    return {
+      email: "",
+      password: ""
+    }
+  },
+  methods: {
+
+    login() {
+      console.log(this.email, this.password)
+      this.$store.dispatch("login", [this.email, this.password]).then(status => {
+        if (status) {
+          console.log("success")
+        } else {
+          console.log("wrong password or email")
+        }
+      }).then(() => {
+        console.log(this.$store.state.user)
+      })
+    }
+  }
+}
+
+
 </script>
 
 <style>

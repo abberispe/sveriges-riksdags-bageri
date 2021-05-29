@@ -1,13 +1,14 @@
 import {
   createRouter,
-  createWebHistory
+  createWebHistory,
+  createWebHashHistory
 } from 'vue-router'
 
 import store from "./store/index.js";
 
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [{
       path: '/',
       name: "Home",
@@ -41,7 +42,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+  if (to.meta.requiresAuth) {
+    console.log(store.state.user)
     if (!store.getters.isLoggedIn) {
      
       next({

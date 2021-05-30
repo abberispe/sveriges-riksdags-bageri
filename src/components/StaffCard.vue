@@ -1,6 +1,6 @@
 <template>
   <div class="rounded shadow-lg w-auto flex" style="background-color: #e0ccb4">
-        <img class="rounded-full" src="https://cdn.fakercloud.com/avatars/ganserene_128.jpg">
+        <img class="rounded-full" :src="avatar">
         <div class="m-2">
             <a class="font-serif tracking-wide" :href="mail">{{name}}</a>
             <p class="font-serif">{{role}}</p>
@@ -14,6 +14,7 @@
 export default {
     props: {
         name: String, 
+        avatar: String,
         role: String,
         tel: String,
         mail: String

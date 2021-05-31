@@ -83,9 +83,12 @@ const store = createStore({
     
             const getRes = await axios.get("http://localhost:3001/customers")
             const db = getRes.data
-    
+
+            
+
             for (let i = 0; i < db.length; i++) {
                 const user = db[i];
+                console.log(newUser.email === user.email)
                 if (newUser.email === user.email) {
                     console.log("Same email")
                     return false
@@ -116,19 +119,12 @@ const store = createStore({
                 totalPrice: totalPrice(this.state.cart),
                 timestamp: new Date().toJSON()
             }
-           console.log(this.state.cart)
-           console.log(order)
-            // const res = await axios.post("http://localhost:3001/orders", orderobj)
+            console.log(this.state.cart)
+            console.log(order)
+            
+            const res = await axios.post("http://localhost:3001/orders", order)
+            commit("CLEAR_CART")
         },
-
-        addItemToCart ({commit}, data) {
-            console.log(this.state.cart.includes(data), data)
-            if (!this.state.cart.includes(data)){
-                commit("ADD_ITEM", data)
-            }
-        }
-
-    
     },
 
 
@@ -163,7 +159,7 @@ const store = createStore({
             state.cart.splice(i, 1);
         },
         CLEAR_CART (state, id) {
-
+            state.cart = []
         },
 
 

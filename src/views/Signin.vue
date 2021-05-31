@@ -6,6 +6,7 @@
               <div v-if="loginForm">
                 <div class="mt-4">
                     <input placeholder="Användarnamn" v-model="email" class="bg-white text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="email">
+                     <span v-if="wrongPassOrEm" class="text-red-500"> * Fel Lösenord eller Email</span>
                 </div>
                 <div class="mt-4">
                     <input placeholder="Lösenord" v-model="password" class="bg-white text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="password">
@@ -26,6 +27,7 @@
                 </div>
                 <div class="mt-4">
                     <input placeholder="Email" v-model="newUser.email" class="bg-white text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="email">
+                    <span v-if="sameEmail" class="text-red-500"> * Email upptagen</span>
                 </div>
                 <div class="mt-4">
                     <input placeholder="Avatar" v-model="newUser.avatar" class="bg-white text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" type="text">
@@ -55,7 +57,9 @@ export default {
         return {
             email: "",
             password: "",
-             loginForm: true,
+            loginForm: true,
+            wrongPassOrEm: false,
+            sameEmail: false,
 
             newUser: {
                 name: "",
@@ -75,6 +79,7 @@ export default {
                     this.$router.push(this.$route.query.redirect || '/')
                 } else {
                     console.log("wrong password or email")
+                    this.wrongPassOrEm = true
                 }
             })
         },
@@ -84,6 +89,7 @@ export default {
                     console.log("account created")
                 } else {
                     console.log("same email")
+                    this.sameEmail = true
                 }
             })
         }

@@ -61,7 +61,7 @@
         </div>
         <div class="w-3/6 bg-gray-700 h-half flex justify-center items-center">
           <img
-          src="../images/politicians/Palme.jpg"
+          src="../images/politicians/Ola.jpg"
           class="object-cover w-full h-full filter brightness-50"
         >
         </div>
